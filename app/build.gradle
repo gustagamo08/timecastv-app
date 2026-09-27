@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.application'
+}
+
+// La firma fija llega desde los "Secrets" de GitHub (ver README).
+// Si no existen, se firma con la clave debug (sirve para probar, pero
+// las actualizaciones no se podrán instalar encima de la versión anterior).
+def keystorePath = System.getenv('KEYSTORE_FILE')
+
+android {
+    namespace 'com.vmedios.timecastv'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.vmedios.timecastv'
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePath) {
+                storeFile file(keystorePath)
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias 'timecastv'
+                keyPassword System.getenv('KEYSTORE_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig keystorePath ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

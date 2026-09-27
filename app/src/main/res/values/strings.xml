@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TimeCastV</string>
+    <string name="error_title">Sin conexión</string>
+    <string name="error_msg">No pudimos cargar TimeCastV. Revisa tu conexión a internet e inténtalo de nuevo.</string>
+    <string name="retry">Reintentar</string>
+    <string name="press_again">Presiona Atrás otra vez para salir</string>
+</resources>
